@@ -1,0 +1,2 @@
+D:\ProgramData\Anaconda3\envs\python38\Scripts\pyinstaller.exe -F E:\digit\receive_develop\main_run.py
+D:\ProgramData\Anaconda3\envs\python38\Scripts\pyinstaller.exe -F E:\receive\main_run.py
