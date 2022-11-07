@@ -1,38 +1,40 @@
 from get_data import GetData
-# è·å–ç‰©æ–™æ¥å£ç±»
+# »ñÈ¡ÎïÁÏ½Ó¿ÚÀà
 class GetProduce(GetData):
     def __init__(self):
         GetData.__init__(self)
-        # è¯»å–URL
-        self.url = self.file['get_production_url']
-        # è¯»å–å‚æ•°
-        self.data = self.file['get_production_data']
-        # è¯·æ±‚çš„é—´éš”æ—¶é—´
-        self.request_ct = self.file['get_production_request_ct']
-        # å…¥å‚çš„é—´éš”æ—¶é—´
-        self.time_ct = self.file['get_production_time_cr']
-        # ç”Ÿäº§è¿‡ç¨‹ç»Ÿè®¡è¡¨åç§°
-        self.table = self.file['get_production_table']
-        # ç«™ç‚¹è®¡æ•°è¡¨åç§°
-        self.station_count = self.file['****']
-        # æ—¶é—´æŸ¥è¯¢ç´¢å¼•åç§°
-        self.col = self.file['get_production_time_col']
+        # ¶ÁÈ¡URL
+        self.url = self.file['get_produce_url']
+        # ¶ÁÈ¡²ÎÊı
+        self.data = self.file['get_produce_data']
+        # ÇëÇóµÄ¼ä¸ôÊ±¼ä
+        self.request_ct = self.file['get_produce_request_ct']
+        # Èë²ÎµÄ¼ä¸ôÊ±¼ä
+        self.time_ct = self.file['get_produce_time_cr']
+        # Éú²ú¹ı³ÌÍ³¼Æ±íÃû³Æ
+        self.table = self.file['get_produce_table']
+        # Õ¾µã¼ÆÊı±íÃû³Æ
+        # self.station_count = self.file['****']
+        # Ê±¼ä²éÑ¯Ë÷ÒıÃû³Æ
+        self.col = self.file['get_produce_time_col']
 
     def run(self):
         count = 0
         while True:
             count += 1
-            # æ›´æ–°å…¥å‚æ•°æ®,æ—¶é—´
-            time1,time2 = self.update_params(count)
-            # å‘é€è¯·æ±‚
-            result = self.send_request(time1,time2)
-            # è§£æ
-            data = self.parse(result)['data']
-            # å­˜å…¥æ•°æ®åº“
+            # ¸üĞÂÈë²ÎÊı¾İ,Ê±¼ä
+            time1, time2 = self.update_time(count, self.time_ct)
+            self.data['startTime'] = str(time1)
+            self.data['endTime'] = str(time2)
+            # ·¢ËÍÇëÇó
+            result = self.send_request2(time1,time2)
+            # ½âÎö
+            data = self.parse(result)['Data']
+            # ´æÈëÊı¾İ¿â
             self.use_database(data,time1,time2)
-            # ç«™ç‚¹è®¡æ•°
-            self.station_count_num(data)
-            # ç»Ÿè®¡ç«™ç‚¹å·¥æ—¶
+            # Õ¾µã¼ÆÊı
+            # self.station_count_num(data)
+            # Í³¼ÆÕ¾µã¹¤Ê±
 
 
     def station_count_num(self,data):
@@ -40,12 +42,12 @@ class GetProduce(GetData):
         update_sql = "update %s set count=count+'1' where station = %s"%(self.table,station)
         self.db.ping(reconnect=True)
         self.cur.execute(update_sql)
-        self.db.commit()  # æäº¤åˆ°æ•°æ®åº“
+        self.db.commit()  # Ìá½»µ½Êı¾İ¿â
 
     def count_station_CT(self,data):
         station = data['****']
         now_time = data['****']
-        # æŸ¥è¯¢ç«™ç‚¹æœ€è¿‘ä¸€æ¬¡çš„è®°å½•æ—¶é—´
+        # ²éÑ¯Õ¾µã×î½üÒ»´ÎµÄ¼ÇÂ¼Ê±¼ä
         sel_sql = "select * from %s where station=%s and time "
 
 

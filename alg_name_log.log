@@ -1,0 +1,52 @@
+WARNING - 2022-11-07 15:14:25,652 [get_mToken.py:36] 请求mToken出现异常 'data' 
+
+WARNING - 2022-11-07 15:20:48,846 [get_mToken.py:37] 请求mToken出现异常 'content' 
+
+WARNING - 2022-11-07 15:22:20,505 [get_mToken.py:36] 请求mToken出现异常 'msg' 
+
+INFO - 2022-11-07 15:26:27,381 [get_mToken.py:31] 请求mToken成功,None 
+
+INFO - 2022-11-07 15:29:07,550 [get_mToken.py:31] 请求mToken成功,None 
+
+INFO - 2022-11-07 15:30:30,465 [get_mToken.py:31] 请求mToken成功,None 
+
+INFO - 2022-11-07 15:31:18,469 [get_mToken.py:31] 请求mToken成功,None 
+
+ERROR - 2022-11-07 17:25:28,710 [get_data.py:88] 请求过程出现异常 rfid_table,2022-11-07 17:18:27,2022-11-07 17:25:27,'msg' 
+
+INFO - 2022-11-07 17:25:50,719 [get_mToken.py:32] 请求mToken成功,None 
+
+ERROR - 2022-11-07 17:29:02,114 [get_data.py:88] 请求过程出现异常 rfid_table,2022-11-07 17:19:00,2022-11-07 17:26:00,'msg' 
+
+INFO - 2022-11-07 17:34:31,328 [get_mToken.py:32] 请求mToken成功,None 
+
+INFO - 2022-11-07 17:38:27,419 [get_mToken.py:32] 请求mToken成功,None 
+
+INFO - 2022-11-07 17:40:57,033 [get_mToken.py:32] 请求mToken成功,None 
+
+INFO - 2022-11-07 17:41:20,739 [get_data.py:83] 请求成功 None,rfid_table,2022-11-07 17:34:06,2022-11-07 17:41:06 
+
+INFO - 2022-11-07 17:43:17,363 [get_mToken.py:32] 请求mToken成功,None 
+
+INFO - 2022-11-07 17:43:27,366 [get_data.py:83] 请求成功 None,rfid_table,2022-11-07 17:36:26,2022-11-07 17:43:26 
+
+INFO - 2022-11-07 17:53:10,436 [get_mToken.py:32] 请求mToken成功,None 
+
+INFO - 2022-11-07 17:53:20,553 [get_data.py:83] 请求成功 None,produce_table,2022-11-07 17:46:20,2022-11-07 17:53:20 
+
+ERROR - 2022-11-07 17:54:46,966 [get_data.py:106] 数据插入失败produce_table,2022-11-07 17:46:20,2022-11-07 17:53:20,(1265, "Data truncated for column 'Sn' at row 1") 
+
+INFO - 2022-11-07 17:55:42,103 [get_mToken.py:32] 请求mToken成功,None 
+
+INFO - 2022-11-07 17:55:52,195 [get_data.py:83] 请求成功 None,produce_table,2022-11-07 17:48:51,2022-11-07 17:55:51 
+
+ERROR - 2022-11-07 17:56:23,931 [get_data.py:106] 数据插入失败produce_table,2022-11-07 17:48:51,2022-11-07 17:55:51,(1265, "Data truncated for column 'Sn' at row 1") 
+
+INFO - 2022-11-07 17:57:06,110 [get_mToken.py:32] 请求mToken成功,None 
+
+INFO - 2022-11-07 17:57:16,314 [get_data.py:83] 请求成功 None,produce_table,2022-11-07 17:50:15,2022-11-07 17:57:15 
+
+INFO - 2022-11-07 18:02:10,958 [get_mToken.py:32] 请求mToken成功,None 
+
+INFO - 2022-11-07 18:02:20,829 [get_data.py:83] 请求成功 None,produce_table,2022-11-07 17:55:20,2022-11-07 18:02:20 
+

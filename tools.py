@@ -3,11 +3,12 @@ import json
 import datetime
 # 全局变量token存储
 token_str = ''
+mToken_str = ''
 # 创建一个logger实例并设置日志级别
 logger = logging.getLogger('alg_name')
 logger.setLevel(logging.DEBUG)
 # 配置handler，拟将日志记录输出至/log/文件夹
-file_name = './alg_name_log.log'  # 注意：如果/log/文件夹不存在，则需要新建
+file_name = './log_temp/alg_name_log.log'  # 注意：如果/log/文件夹不存在，则需要新建
 # 每天午夜生成alg_name_log.log文件，最多保留30天
 file_handler = logging.handlers.TimedRotatingFileHandler(file_name, when='MIDNIGHT', interval=1,backupCount=30)
 # 配置handler，拟将日志记录输出在控制台

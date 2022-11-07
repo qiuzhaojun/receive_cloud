@@ -30,7 +30,7 @@ def descrypt_3des(data):
 
 
 if __name__ == '__main__':
-    res = encrypt_3des('2URH&%qaoX?74GyW')
+    res = encrypt_3des('XYJ_UWB')
     print(res)
     res2 = descrypt_3des(res)
     print(res2)

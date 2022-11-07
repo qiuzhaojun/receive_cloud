@@ -70,6 +70,25 @@ class GetData:
             time.sleep(self.get_data_request_fail_ct)
         return result
 
+    # 发送请求2
+    def send_request2(self,time1,time2):
+        while True:
+            try:
+                # 更新参数需要在请求前
+                self.headers['Authorization'] = tools.mToken_str
+                result = requests.post(url=self.url, headers=self.headers, json=self.data)
+                if result.status_code == 200:
+                    # 成功信息参数
+                    msg = self.parse(result)['Message']
+                    tools.logger.info('请求成功 %s,%s,%s,%s' % (msg, self.table, time1, time2))
+                    break
+                else:
+                    tools.logger.error('请求失败，重新请求 %s,%s,%s,%s' % (self.table, time1, time2, result.text))
+            except Exception as reason:
+                tools.logger.error('请求过程出现异常 %s,%s,%s,%s' % (self.table, time1, time2, reason))
+            time.sleep(self.get_data_request_fail_ct)
+        return result
+
     # 解析
     def parse(self,result):
         result_bytes = result.content  # 返回字节串
