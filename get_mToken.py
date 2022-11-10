@@ -38,6 +38,5 @@ class GetMToken(GetData):
                 time.sleep(self.fail_ct)
             # 解析结果,存入配置文件中/全局变量/redis,因为是bearer模式，所以需要进行拼接
             tools.mToken_str = 'Bearer ' + self.parse(result)['Data']['Token']
-            print(tools.mToken_str)
             # 半小时后密钥失效，重新获取
             time.sleep(self.success_ct)

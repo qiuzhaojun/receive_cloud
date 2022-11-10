@@ -28,6 +28,13 @@ class GetMaterial(GetData):
             # 解析
             data = self.parse(result)['data']
             # 存入数据库
-            self.use_database(data,time1,time2)
+            self.database.use_database(data,self.table,self.col,time1,time2)
             # 保持循环
             time.sleep(self.request_ct)
+
+    # 更新参数
+    def update_params(self,count):
+        time1, time2 = self.update_time(count, self.time_ct)
+        self.data['params']['p02'] = str(time1)
+        self.data['params']['p03'] = str(time2)
+        return time1,time2

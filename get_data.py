@@ -28,13 +28,6 @@ class GetData:
         self.url = None
         self.col = None
 
-    # 更新参数
-    def update_params(self,count):
-        time1, time2 = self.update_time(count, self.time_ct)
-        self.data['params']['p02'] = str(time1)
-        self.data['params']['p03'] = str(time2)
-        return time1,time2
-
     # 更新参数时间
     def update_time(self,count,time_ct):
         # 使用固定时间 + 间隔时间*循环次数
@@ -60,8 +53,8 @@ class GetData:
                 result = requests.post(url=self.url, headers=self.headers, json=self.data)
                 if result.status_code == 200:
                     # 成功信息参数
-                    msg = self.parse(result)['msg']
-                    tools.logger.info('请求成功 %s,%s,%s,%s' % (msg, self.table, time1, time2))
+                    # msg = self.parse(result)['msg']
+                    # tools.logger.info('请求成功 %s,%s,%s,%s' % (msg, self.table, time1, time2))
                     break
                 else:
                     tools.logger.error('请求失败，重新请求 %s,%s,%s,%s' % (self.table, time1, time2, result.text))
@@ -79,8 +72,8 @@ class GetData:
                 result = requests.post(url=self.url, headers=self.headers, json=self.data)
                 if result.status_code == 200:
                     # 成功信息参数
-                    msg = self.parse(result)['Message']
-                    tools.logger.info('请求成功 %s,%s,%s,%s' % (msg, self.table, time1, time2))
+                    # msg = self.parse(result)['Message']
+                    # tools.logger.info('请求成功 %s,%s,%s,%s' % (msg, self.table, time1, time2))
                     break
                 else:
                     tools.logger.error('请求失败，重新请求 %s,%s,%s,%s' % (self.table, time1, time2, result.text))
@@ -95,21 +88,5 @@ class GetData:
         result_str = result_bytes.decode()  # 返回字符串
         result_json = json.loads(result_str)  # 字符串转化为json格式
         return result_json
-
-    # 数据库操作
-    def use_database(self,data,time1,time2):
-        if data:
-            try:
-                self.database.database_save(data, self.table, self.col, time1, time2)
-                tools.logger.info('数据插入成功%s,%s,%s' % (self.table, time1, time2))
-            except Exception as reason:
-                tools.logger.error('数据插入失败%s,%s,%s,%s' % (self.table, time1, time2, reason))
-        else:
-            tools.logger.warning('没有数据%s,%s,%s' % (self.table, time1, time2))
-
-
-
-
-
 
 

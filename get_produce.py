@@ -1,53 +1,43 @@
 from get_data import GetData
-# »ñÈ¡ÎïÁÏ½Ó¿ÚÀà
+import time
+# è·å–ç‰©æ–™æ¥å£ç±»
 class GetProduce(GetData):
     def __init__(self):
         GetData.__init__(self)
-        # ¶ÁÈ¡URL
+        # è¯»å–URL
         self.url = self.file['get_produce_url']
-        # ¶ÁÈ¡²ÎÊı
+        # è¯»å–å‚æ•°
         self.data = self.file['get_produce_data']
-        # ÇëÇóµÄ¼ä¸ôÊ±¼ä
+        # è¯·æ±‚çš„é—´éš”æ—¶é—´
         self.request_ct = self.file['get_produce_request_ct']
-        # Èë²ÎµÄ¼ä¸ôÊ±¼ä
+        # å…¥å‚çš„é—´éš”æ—¶é—´
         self.time_ct = self.file['get_produce_time_cr']
-        # Éú²ú¹ı³ÌÍ³¼Æ±íÃû³Æ
+        # ç”Ÿäº§è¿‡ç¨‹ç»Ÿè®¡è¡¨åç§°
         self.table = self.file['get_produce_table']
-        # Õ¾µã¼ÆÊı±íÃû³Æ
-        # self.station_count = self.file['****']
-        # Ê±¼ä²éÑ¯Ë÷ÒıÃû³Æ
+        # ç«™ç‚¹è®¡æ•°è¡¨åç§°
+        self.station_status_info = self.file['station_status_info']
+        # æ—¶é—´æŸ¥è¯¢ç´¢å¼•åç§°
         self.col = self.file['get_produce_time_col']
 
     def run(self):
         count = 0
         while True:
             count += 1
-            # ¸üĞÂÈë²ÎÊı¾İ,Ê±¼ä
-            time1, time2 = self.update_time(count, self.time_ct)
-            self.data['startTime'] = str(time1)
-            self.data['endTime'] = str(time2)
-            # ·¢ËÍÇëÇó
+            # æ›´æ–°å…¥å‚æ•°æ®,æ—¶é—´
+            time1, time2 = self.update_params(count)
+            # å‘é€è¯·æ±‚
             result = self.send_request2(time1,time2)
-            # ½âÎö
+            # è§£æ
             data = self.parse(result)['Data']
-            # ´æÈëÊı¾İ¿â
-            self.use_database(data,time1,time2)
-            # Õ¾µã¼ÆÊı
-            # self.station_count_num(data)
-            # Í³¼ÆÕ¾µã¹¤Ê±
+            # å­˜å…¥æ•°æ®åº“
+            self.database.use_database(data,self.table,self.col,time1,time2)
+            # ç«™ç‚¹è®¡æ•°
+            self.database.count_station_num(data,self.station_status_info)
+            # ä¿æŒå¾ªç¯
+            time.sleep(self.request_ct)
 
-
-    def station_count_num(self,data):
-        station = data['s***']
-        update_sql = "update %s set count=count+'1' where station = %s"%(self.table,station)
-        self.db.ping(reconnect=True)
-        self.cur.execute(update_sql)
-        self.db.commit()  # Ìá½»µ½Êı¾İ¿â
-
-    def count_station_CT(self,data):
-        station = data['****']
-        now_time = data['****']
-        # ²éÑ¯Õ¾µã×î½üÒ»´ÎµÄ¼ÇÂ¼Ê±¼ä
-        sel_sql = "select * from %s where station=%s and time "
-
-
+    def update_params(self,count):
+        time1, time2 = self.update_time(count, self.time_ct)
+        self.data['startTime'] = str(time1)
+        self.data['endTime'] = str(time2)
+        return time1,time2
